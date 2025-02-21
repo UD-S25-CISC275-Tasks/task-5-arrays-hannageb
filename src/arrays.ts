@@ -22,7 +22,9 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return numbers.map((num: string): number => Number(num));
+    return numbers.map((num: string): number =>
+        isNaN(Number(num)) ? 0 : Number(num),
+    );
 }
 
 /**
@@ -46,6 +48,7 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
         msg.endsWith("!") ? msg.toUpperCase() : msg,
     );
 
+    // note to self: boolean should be true for values to keep in the filtered array.
     let filtered = messages.filter(
         (msg: string): boolean => !msg.endsWith("?"),
     );
