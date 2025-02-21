@@ -22,7 +22,7 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    return numbers.map((num: string): number => Number(num));
 }
 
 /**
@@ -75,7 +75,9 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    let sum = addends.reduce((total: number, num: number) => total + num, 0);
+    let num_string = addends.length > 0 ? addends.join("+") : "0";
+    return `${sum}=${num_string}`;
 }
 
 /**
@@ -88,5 +90,5 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let positive = [...values];
 }
