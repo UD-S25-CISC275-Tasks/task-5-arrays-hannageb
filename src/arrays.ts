@@ -13,6 +13,7 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
+    numbers = numbers.map((num: number): number => num * 3);
     return numbers;
 }
 
@@ -41,7 +42,12 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    messages = messages.map((msg: string): string =>
+        msg.endsWith("!") ? msg.toUpperCase() : msg,
+    );
+
+    let filtered = messages.filter((msg: string): boolean => msg.endsWith("?"));
+    return filtered;
 };
 
 /**
