@@ -5,7 +5,7 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    if (numbers.length === 0){
+    if (!numbers.length) {
         return numbers;
     } else {
         let bookEnd: number[] = [];
@@ -13,7 +13,6 @@ export function bookEndList(numbers: number[]): number[] {
         bookEnd.push(numbers[numbers.length - 1]);
         return bookEnd;
     }
-    
 }
 
 /**
@@ -43,7 +42,11 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    return amounts.map((amt: string) => {
+        let num = amt.startsWith("$") ? amt.slice(1) : amt;
+        let int = parseInt(num);
+        return isNaN(int) ? 0 : int;
+    })
 };
 
 /**
