@@ -46,7 +46,7 @@ export const removeDollars = (amounts: string[]): number[] => {
         let num = amt.startsWith("$") ? amt.slice(1) : amt;
         let int = parseInt(num);
         return isNaN(int) ? 0 : int;
-    })
+    });
 };
 
 /**
@@ -112,5 +112,27 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    // if all values are positive:
+    if (values.every((val: number): boolean => val > 0)) {
+        // creating a copy so we can maintain the original array
+        let copy = [...values];
+        let sum = copy.reduce((sum: number, val: number) => sum + val, 0);
+        copy.push(sum);
+        return copy;
+    }
+    // if there is a negative number in the array 
+    else {
+        // creating a copy so we can maintain the original array
+        let duplicate = [...values];
+        let negativeIndex = duplicate.findIndex(
+            (val: number): boolean => val < 0,
+        );
+        // variable to add all the numbers up to the negative one, not including the values after the negative or the negative number itself
+        let onlyPositive = duplicate.slice(0, negativeIndex);
+        // sum of all positive integers 
+        let sum = onlyPositive.reduce((sum: number, val: number) => sum + val, 0);
+        // inserting the sum 
+        duplicate.splice(negativeIndex + 1, 0, sum);
+        return duplicate;
+    }
 }
