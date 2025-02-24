@@ -8,9 +8,7 @@ export function bookEndList(numbers: number[]): number[] {
     if (!numbers.length) {
         return numbers;
     } else {
-        let bookEnd: number[] = [];
-        bookEnd.push(numbers[0]);
-        bookEnd.push(numbers[numbers.length - 1]);
+        let bookEnd = [numbers[0], numbers[numbers.length - 1]];
         return bookEnd;
     }
 }
@@ -114,13 +112,12 @@ export function makeMath(addends: number[]): string {
 export function injectPositive(values: number[]): number[] {
     // if all values are positive:
     if (values.every((val: number): boolean => val > 0)) {
+        let sum = values.reduce((sum: number, val: number) => sum + val, 0);
         // creating a copy so we can maintain the original array
-        let copy = [...values];
-        let sum = copy.reduce((sum: number, val: number) => sum + val, 0);
-        copy.push(sum);
+        let copy = [...values, sum];
         return copy;
     }
-    // if there is a negative number in the array 
+    // if there is a negative number in the array
     else {
         // creating a copy so we can maintain the original array
         let duplicate = [...values];
@@ -129,9 +126,12 @@ export function injectPositive(values: number[]): number[] {
         );
         // variable to add all the numbers up to the negative one, not including the values after the negative or the negative number itself
         let onlyPositive = duplicate.slice(0, negativeIndex);
-        // sum of all positive integers 
-        let sum = onlyPositive.reduce((sum: number, val: number) => sum + val, 0);
-        // inserting the sum 
+        // sum of all positive integers
+        let sum = onlyPositive.reduce(
+            (sum: number, val: number) => sum + val,
+            0,
+        );
+        // inserting the sum
         duplicate.splice(negativeIndex + 1, 0, sum);
         return duplicate;
     }
